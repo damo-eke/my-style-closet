@@ -109,7 +109,8 @@ export function ProductCard({ product, onRemove, onSelect }: ProductCardProps) {
   );
 }
 
-function getColorCode(colorName: string): string {
+function getColorCode(colorName: string | null): string {
+  if (!colorName) return '#9ca3af';
   const colors: Record<string, string> = {
     'black': '#1a1a1a',
     'white': '#ffffff',
