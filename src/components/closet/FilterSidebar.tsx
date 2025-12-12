@@ -145,7 +145,7 @@ function FilterSection({ title, items, activeItems, onToggle, counts, isColor }:
         <ChevronDown className="w-4 h-4 transition-transform duration-200 [&[data-state=open]]:rotate-180" />
       </CollapsibleTrigger>
       <CollapsibleContent className="pt-2 space-y-1">
-        {items.map((item) => (
+        {items.filter(item => item != null).map((item) => (
           <label
             key={item}
             className="flex items-center gap-3 py-1.5 px-2 rounded cursor-pointer hover:bg-secondary transition-base"
@@ -172,7 +172,8 @@ function FilterSection({ title, items, activeItems, onToggle, counts, isColor }:
   );
 }
 
-function getColorCode(colorName: string): string {
+function getColorCode(colorName: string | null): string {
+  if (!colorName) return '#9ca3af';
   const colors: Record<string, string> = {
     'black': '#1a1a1a',
     'white': '#ffffff',
