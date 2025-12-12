@@ -70,17 +70,17 @@ export function useCloset() {
       let comparison = 0;
       switch (sortBy) {
         case 'brand':
-          comparison = a.brand.localeCompare(b.brand);
+          comparison = (a.brand || '').localeCompare(b.brand || '');
           break;
         case 'color':
-          comparison = a.color.localeCompare(b.color);
+          comparison = (a.color || '').localeCompare(b.color || '');
           break;
         case 'type':
-          comparison = a.product_type.localeCompare(b.product_type);
+          comparison = (a.product_type || '').localeCompare(b.product_type || '');
           break;
         case 'price':
-          const priceA = typeof a.price === 'string' ? parseFloat(a.price.replace(/[^0-9.]/g, '')) : a.price;
-          const priceB = typeof b.price === 'string' ? parseFloat(b.price.replace(/[^0-9.]/g, '')) : b.price;
+          const priceA = typeof a.price === 'string' ? parseFloat(a.price.replace(/[^0-9.]/g, '')) : (a.price || 0);
+          const priceB = typeof b.price === 'string' ? parseFloat(b.price.replace(/[^0-9.]/g, '')) : (b.price || 0);
           comparison = priceA - priceB;
           break;
         default:
