@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Filter, LayoutGrid, Shirt } from 'lucide-react';
 import { useCloset } from '@/hooks/useCloset';
+import { useOnboarding } from '@/hooks/useOnboarding';
 import { Product } from '@/types/product';
 import { ProductCard } from '@/components/closet/ProductCard';
 import { ProductDetailModal } from '@/components/closet/ProductDetailModal';
@@ -8,6 +9,7 @@ import { FilterSidebar } from '@/components/closet/FilterSidebar';
 import { BrandStats } from '@/components/closet/BrandStats';
 import { SortControls } from '@/components/closet/SortControls';
 import { SearchBar } from '@/components/closet/SearchBar';
+import { OnboardingModal } from '@/components/onboarding/OnboardingModal';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -18,9 +20,15 @@ const Index = () => {
     removeProduct, toggleFilter, clearFilters, toggleSort,
   } = useCloset();
 
+  const { isOnboardingComplete, completeOnboarding } = useOnboarding();
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const activeFilterCount = filters.brands.length + filters.colors.length + filters.productTypes.length;
+
+  // Show nothing until we know onboarding state
+  if (isOnboardingComplete === null) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -75,6 +83,7 @@ const Index = () => {
         </main>
       </div>
       <ProductDetailModal product={selectedProduct} open={!!selectedProduct} onClose={() => setSelectedProduct(null)} onRemove={removeProduct} />
+      <OnboardingModal open={!isOnboardingComplete} onComplete={completeOnboarding} />
     </div>
   );
 };
