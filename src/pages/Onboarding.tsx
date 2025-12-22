@@ -35,6 +35,7 @@ export interface ScannedItem {
 }
 
 export interface PersonalDetails {
+  gender?: string;
   shirtSize?: string;
   pantSize?: string;
   shoeSize?: string;

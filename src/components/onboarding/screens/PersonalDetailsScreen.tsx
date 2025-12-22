@@ -18,6 +18,7 @@ interface PersonalDetailsScreenProps {
   onUpdateDetails: (details: PersonalDetails) => void;
 }
 
+const GENDERS = ['Male', 'Female', 'Non-binary', 'Prefer not to say'];
 const SHIRT_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
 const PANT_SIZES = ['28', '30', '32', '34', '36', '38', '40'];
 const SHOE_SIZES = ['6', '7', '8', '9', '10', '11', '12', '13'];
@@ -81,6 +82,25 @@ export function PersonalDetailsScreen({
         transition={{ delay: 0.2 }}
         className="mt-8 space-y-5"
       >
+        <div className="space-y-2">
+          <Label className="text-sm text-muted-foreground">Gender</Label>
+          <Select
+            value={details.gender || ''}
+            onValueChange={(value) => updateField('gender', value)}
+          >
+            <SelectTrigger className="h-12 rounded-xl">
+              <SelectValue placeholder="Select gender" />
+            </SelectTrigger>
+            <SelectContent>
+              {GENDERS.map((gender) => (
+                <SelectItem key={gender} value={gender}>
+                  {gender}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label className="text-sm text-muted-foreground">Shirt size</Label>
