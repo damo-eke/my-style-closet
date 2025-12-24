@@ -20,8 +20,40 @@ interface PersonalDetailsScreenProps {
 
 const GENDERS = ['Male', 'Female', 'Non-binary', 'Prefer not to say'];
 const SHIRT_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
-const PANT_SIZES = ['28', '30', '32', '34', '36', '38', '40'];
 const SHOE_SIZES = ['6', '7', '8', '9', '10', '11', '12', '13'];
+
+// Gender-specific sizing options
+const FEMALE_PANT_SIZES = ['22', '23', '24', '25', '26', '27', '28', '30', '32', '34', '36', '38', '40'];
+const MALE_PANT_SIZES = ['28', '30', '32', '34', '36', '38', '40'];
+
+const FEMALE_HEIGHTS = ["4'8\"", "4'9\"", "4'10\"", "4'11\"", "5'0\"", "5'1\"", "5'2\"", "5'3\"", "5'4\"", "5'5\"", "5'6\"", "5'7\"", "5'8\"", "5'9\"", "5'10\"", "5'11\"", "6'0\"", "6'1\"", "6'2\"", "6'3\""];
+const MALE_HEIGHTS = ["5'4\"", "5'5\"", "5'6\"", "5'7\"", "5'8\"", "5'9\"", "5'10\"", "5'11\"", "6'0\"", "6'1\"", "6'2\"", "6'3\""];
+
+const FEMALE_WEIGHTS = ['100-120 lbs', '120-140 lbs', '140-160 lbs', '160-180 lbs', '180-200 lbs', '200-220 lbs', '220+ lbs'];
+const MALE_WEIGHTS = ['120-140 lbs', '140-160 lbs', '160-180 lbs', '180-200 lbs', '200-220 lbs', '220+ lbs'];
+
+const getSizeOptions = (gender: string | undefined) => {
+  if (gender === 'Female') {
+    return {
+      pantSizes: FEMALE_PANT_SIZES,
+      heights: FEMALE_HEIGHTS,
+      weights: FEMALE_WEIGHTS,
+    };
+  } else if (gender === 'Male') {
+    return {
+      pantSizes: MALE_PANT_SIZES,
+      heights: MALE_HEIGHTS,
+      weights: MALE_WEIGHTS,
+    };
+  } else {
+    // Non-binary or Prefer not to say - show all options
+    return {
+      pantSizes: [...new Set([...FEMALE_PANT_SIZES, ...MALE_PANT_SIZES])].sort((a, b) => parseInt(a) - parseInt(b)),
+      heights: FEMALE_HEIGHTS, // Already includes all heights
+      weights: FEMALE_WEIGHTS, // Already includes all weights
+    };
+  }
+};
 
 export function PersonalDetailsScreen({
   onNext,
@@ -29,6 +61,8 @@ export function PersonalDetailsScreen({
   details,
   onUpdateDetails,
 }: PersonalDetailsScreenProps) {
+  const sizeOptions = getSizeOptions(details.gender);
+  
   const updateField = (field: keyof PersonalDetails, value: string) => {
     onUpdateDetails({ ...details, [field]: value });
   };
@@ -131,7 +165,7 @@ export function PersonalDetailsScreen({
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
               <SelectContent>
-                {PANT_SIZES.map((size) => (
+                {sizeOptions.pantSizes.map((size) => (
                   <SelectItem key={size} value={size}>
                     {size}
                   </SelectItem>
@@ -171,7 +205,7 @@ export function PersonalDetailsScreen({
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
               <SelectContent>
-                {["5'4\"", "5'5\"", "5'6\"", "5'7\"", "5'8\"", "5'9\"", "5'10\"", "5'11\"", "6'0\"", "6'1\"", "6'2\"", "6'3\""].map((h) => (
+                {sizeOptions.heights.map((h) => (
                   <SelectItem key={h} value={h}>
                     {h}
                   </SelectItem>
@@ -190,7 +224,7 @@ export function PersonalDetailsScreen({
                 <SelectValue placeholder="Select" />
               </SelectTrigger>
               <SelectContent>
-                {['120-140 lbs', '140-160 lbs', '160-180 lbs', '180-200 lbs', '200-220 lbs', '220+ lbs'].map((w) => (
+                {sizeOptions.weights.map((w) => (
                   <SelectItem key={w} value={w}>
                     {w}
                   </SelectItem>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ChevronLeft, Check, X, Shirt, PanelBottom, Footprints, Watch } from 'lucide-react';
+import { ChevronLeft, Check, X, Shirt, Footprints, Watch } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { cn } from '@/lib/utils';
@@ -12,9 +12,15 @@ interface ItemReviewScreenProps {
   onBack: () => void;
 }
 
+const PantsIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 4h16v3l-3 14h-3l-2-10-2 10H7L4 7V4z"/>
+  </svg>
+);
+
 const CATEGORY_ICONS = {
   tops: Shirt,
-  bottoms: PanelBottom,
+  bottoms: PantsIcon,
   shoes: Footprints,
   accessories: Watch,
 };

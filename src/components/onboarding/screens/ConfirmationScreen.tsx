@@ -53,7 +53,7 @@ export function ConfirmationScreen({ selectedItems, onConfirm, onBack }: Confirm
           Ready to build your closet?
         </h2>
         <p className="text-muted-foreground leading-relaxed">
-          These items will be added to your digital wardrobe.
+          These items will be added immediately.
         </p>
       </motion.div>
 
