@@ -8,7 +8,7 @@ interface ActivationScreenProps {
 }
 
 const NEXT_STEPS = [
-  { icon: Search, label: 'Browse your wardrobe' },
+  { icon: Search, label: 'Browse your closet and recent uploads' },
   { icon: Palette, label: 'Create outfit combinations' },
   { icon: Calendar, label: 'Plan your week' },
 ];
@@ -94,7 +94,7 @@ export function ActivationScreen({ onComplete }: ActivationScreenProps) {
           Your closet is ready!
         </h1>
         <p className="text-muted-foreground text-lg">
-          Time to explore your digital wardrobe.
+          Time to explore.
         </p>
       </motion.div>
 

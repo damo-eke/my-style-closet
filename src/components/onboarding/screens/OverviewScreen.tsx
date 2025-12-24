@@ -24,7 +24,7 @@ const STEPS = [
   {
     icon: CheckCircle,
     title: 'Review items',
-    description: 'Confirm your wardrobe',
+    description: 'Confirm your online closet',
     color: 'bg-sage/10 text-sage',
   },
 ];

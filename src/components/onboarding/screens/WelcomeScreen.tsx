@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Sparkles } from 'lucide-react';
+import { Shirt } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface WelcomeScreenProps {
@@ -24,7 +24,7 @@ export function WelcomeScreen({ onNext, onLogin }: WelcomeScreenProps) {
         className="relative mb-8"
       >
         <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center shadow-elevated">
-          <Sparkles className="w-12 h-12 text-primary-foreground" />
+          <Shirt className="w-12 h-12 text-primary-foreground" />
         </div>
         <motion.div
           initial={{ scale: 0 }}
@@ -49,7 +49,7 @@ export function WelcomeScreen({ onNext, onLogin }: WelcomeScreenProps) {
           <span className="text-primary">digitized</span>
         </h1>
         <p className="text-muted-foreground text-lg leading-relaxed">
-          We'll scan your email receipts to automatically build your wardrobe. No manual entry needed.
+          We digitize your online purchases to help you understand what you own, style it across every occasion, and build a personal style that shows up consistently in your life.
         </p>
       </motion.div>
 
